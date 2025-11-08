@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function QuienesSomos() {
   return (
-    <section className="flex flex-col items-center py-16 bg-[#fdf9f8]">
+    <section className="flex flex-col items-center py-16 bg-[#fdf9f8] overflow-x-hidden w-full">
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export default function QuienesSomos() {
 
         {/* 🩷 Grilla animada de imágenes */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"
           initial="hidden"
           whileInView="visible"
           variants={{
@@ -129,7 +129,7 @@ export default function QuienesSomos() {
                 alt={img}
                 width={700}
                 height={1000}
-                className="rounded-xl shadow-md object-cover h-100 object-bottom w-full"
+                className="rounded-xl shadow-md object-cover w-full h-auto"
               />
             </motion.div>
           ))}
