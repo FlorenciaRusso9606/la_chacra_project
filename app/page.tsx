@@ -2,12 +2,12 @@ export default function HomePage() {
   return (
     <main className="relative">
       {/* Banner */}
-      <div className="relative w-full h-[calc(100vh-80px)] overflow-hidden">
+      <div className="relative w-screen h-screen overflow-hidden">
         <picture>
-          <source media="(min-width:1024px)" srcSet="/images/banner/banner-desktop.jpg" />
-          <source media="(min-width:640px)" srcSet="/images/banner/banner-tablet.jpg" />
+          <source media="(min-width:1024px)" srcSet="/images/banner/banner-home-desktop.png" />
+          <source media="(min-width:640px)" srcSet="/images/banner/banner-home-tablet.png" />
           <img
-            src="/images/banner/banner-mobile.jpg"
+            src="/images/banner/banner-home-mobile.png"
             alt="Dulces artesanales"
             className="w-full h-full object-cover"
           />
