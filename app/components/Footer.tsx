@@ -1,7 +1,7 @@
 "use client";
 export const Footer = () => {
   return (
-    <footer className="bg-[#b01a2f] py-10 px-6 mt-16">
+    <footer className="bg-[#414040] py-10 px-6 mt-16">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
 
         {/* Logo */}
@@ -62,7 +62,7 @@ export const Footer = () => {
       </div>
 
       {/* Línea inferior */}
-      <div className="mt-10 text-center text-sm text-white/70 border-t border-white/20 pt-4">
+      <div className="mt-10 text-center text-sm text-white/90 border-t border-white/20 pt-4">
         © 2025 La Chacra. Todos los derechos reservados.
       </div>
     </footer>
