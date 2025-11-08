@@ -27,10 +27,10 @@ export const Footer = () => {
         <div className="flex flex-col text-white">
           <h3 className="font-semibold mb-3 text-lg">Contacto</h3>
           <a
-            href="mailto:dulces@lachacra.com"
+            href="mailto:lachacra74@gmail.com"
             className="hover:text-[#9bcb88] transition-colors mb-2"
           >
-            dulces@lachacra.com
+            lachacra74@gmail.com
           </a>
           <a
             href="https://wa.me/542984212785"

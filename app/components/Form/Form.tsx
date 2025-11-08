@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { formData, formSchema } from "@/app/schemas/formSchema";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import emailjs from "@emailjs/browser";
 
 export default function Form() {
   const {
@@ -14,10 +15,25 @@ export default function Form() {
     formState: { errors, isSubmitting },
   } = useForm<formData>({ resolver: zodResolver(formSchema) });
 
-  const onSubmit = (data: formData) => {
-    toast.success("Mensaje enviado correctamente");
-    console.log(data);
-  };
+  const onSubmit = async (data: formData) => {
+    try{
+      await emailjs.send(
+  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+  {
+    from_name: data.name,
+    from_email: data.email,
+    message: data.textarea,
+  },
+  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
+   toast.success("Mensaje enviado correctamente");
+ 
+  }
+catch(err: any){
+   toast.error("No se pudo enviar el mensaje");
+  console.error("No se pudo enviar el mail", err)
+}
+} 
 
   return (
   <form

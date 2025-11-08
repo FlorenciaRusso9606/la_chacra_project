@@ -25,7 +25,7 @@ export default function Contacto() {
               <Phone size={20} /> <p>+54 2984 212785</p>
             </div>
             <div className="text-[#b01a2f] font-semibold flex items-center gap-2 hover:text-[#9bcb88] transition-colors">
-              <Mail size={20} /> <p>dulces@lachacra.com</p>
+              <Mail size={20} /> <p>lachacra74@gmail.com</p>
             </div>
             <div className="text-[#b01a2f] font-semibold flex items-center gap-2 hover:text-[#9bcb88] transition-colors">
               <MapPin size={20} /> <p>Valle de Río Negro, Argentina</p>
