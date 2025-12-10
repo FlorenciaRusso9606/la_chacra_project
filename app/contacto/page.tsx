@@ -12,12 +12,7 @@ export default function Contacto() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-5xl px-6"
       >
-        <h2 className="text-3xl font-bold text-[#b01a2f] mb-4 text-center">
-          Contactanos
-        </h2>
-        <p className="text-gray-700 text-center mb-12">
-          Escribinos y te responderemos a la brevedad 🍓
-        </p>
+
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="flex flex-col items-center gap-3 text-center mb-8">

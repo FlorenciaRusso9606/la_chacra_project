@@ -97,7 +97,7 @@ export default function QuienesSomos() {
           transformamos en dulces naturales que conservan el alma del valle.
         </p>
 
-        {/* 🩷 Grilla animada de imágenes */}
+        {/* Grilla animada de imágenes */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"
           initial="hidden"
