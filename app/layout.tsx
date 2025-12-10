@@ -1,7 +1,6 @@
-// layout.tsx
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Script from "next/script"; // <-- necesario para JSON-LD
+import Script from "next/script";
 import { ClientProviders } from "./components/ClientProviders";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
@@ -24,15 +23,20 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Dulces artesanales regionales elaborados con frutas seleccionadas. De la chacra del valle a tu mesa.",
+    "Dulces artesanales regionales elaborados en el Valle. Mermeladas caseras 100% naturales, sin conservantes. Producción familiar con frutas seleccionadas. Hechos a mano con recetas tradicionales.",
 
   keywords: [
-    "dulces artesanales",
-    "mermeladas",
-    "productos regionales",
-    "dulces naturales",
-    "La Chacra",
-    "dulces caseros",
+    "dulces artesanales regionales",
+    "mermeladas caseras naturales",
+    "dulces sin conservantes",
+    "dulces del valle",
+    "dulce artesanal de frutilla",
+    "dulce artesanal de manzana",
+    "dulce artesanal de pera",
+    "dulce artesanal de higo",
+    "dulce artesanal de durazno",
+    "mermelada casera",
+    "productos regionales artesanales",
   ],
 
   robots: {
@@ -95,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Datos estructurados JSON-LD */}
         <Script
-          id="json-ld-company"
+          id="json-ld-localbusiness"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -112,7 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 addressRegion: "Río Negro",
               },
               sameAs: [
-                "https://www.instagram.com/lachacra_dulces", 
+                "https://www.instagram.com/lachacra_dulces",
               ],
             }),
           }}
