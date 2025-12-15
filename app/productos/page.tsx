@@ -99,7 +99,7 @@ export default function Productos() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-6xl mx-auto flex-1">
             {productos.map((p, i) => (
               <article
-                key={i}
+                key={p.nombre}
                 className="flex flex-col items-center text-center group"
               >
                 <motion.div
@@ -137,20 +137,7 @@ export default function Productos() {
                   </div>
                 </motion.div>
 
-                <div className="mt-6">
-                  <h3 className="text-xl font-semibold">{p.nombre}</h3>
-                  <p className="text-[#b01a2f] mt-1 font-medium">
-                    ${p.precio}{" "}
-                    <span className="text-[#2A2D34]/60 text-sm">
-                      | {p.peso}
-                    </span>
-                  </p>
-                  <div
-                    className="mt-3 w-10 h-[3px] rounded-full mx-auto"
-                    style={{ backgroundColor: p.color }}
-                    aria-hidden="true"
-                  />
-                </div>
+              
               </article>
             ))}
           </div>
