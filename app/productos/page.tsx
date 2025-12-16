@@ -6,14 +6,14 @@ const productos = [
     nombre: "Dulce de Pera",
     imagen: "/images/productos/pera.jpg",
     color: "#9bcb88",
-    precio: 8000,
+    precio: 7000,
     peso: "460g",
   },
   {
     nombre: "Dulce de Manzana",
     imagen: "/images/productos/manzana.jpg",
     color: "#b01a2f",
-    precio: 8000,
+    precio: 7000,
     peso: "460g",
   },
   {
