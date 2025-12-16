@@ -12,6 +12,7 @@ export default function Form() {
   const {
     register,
     handleSubmit,
+      reset,
     formState: { errors, isSubmitting },
   } = useForm<formData>({ resolver: zodResolver(formSchema) });
 
@@ -28,6 +29,7 @@ export default function Form() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
       toast.success("Mensaje enviado correctamente");
+      reset();
     } catch (err: any) {
       toast.error("No se pudo enviar el mensaje");
       console.error("No se pudo enviar el mail", err);
