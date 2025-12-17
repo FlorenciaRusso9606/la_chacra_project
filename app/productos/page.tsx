@@ -1,7 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
 
-const productos = [
+const dulces = [
   {
     nombre: "Dulce de Pera",
     imagen: "/images/productos/pera.jpg",
@@ -30,15 +30,17 @@ const productos = [
     precio: 8000,
     peso: "460g",
   },
+
+];
+const pures = [
   {
-    nombre: "Dulce de Higo",
-    imagen: "/images/productos/higo.jpg",
-    color: "#b01a2f",
-    precio: 8000,
+    nombre: "Puré de Manzana",
+    imagen: "/images/productos/pure-manzana.jpg",
+    color: "#9bcb88",
+    precio: 15000,
     peso: "460g",
   },
-];
-
+]
 export default function Productos() {
   const reduceMotion = useReducedMotion();
 
@@ -90,14 +92,14 @@ export default function Productos() {
               Nuestros Productos
             </h2>
             <p className="text-[#2A2D34]/70 mt-4 text-lg max-w-2xl mx-auto">
-              Recetas familiares, cocidas a fuego lento, con el balance justo
+              Dulces cocidos a fuego lento, con el balance justo
               entre dulzura y naturalidad.
             </p>
           </div>
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-6xl mx-auto flex-1">
-            {productos.map((p, i) => (
+            {dulces.map((p, i) => (
               <article
                 key={p.nombre}
                 className="flex flex-col items-center text-center group"
@@ -147,9 +149,55 @@ export default function Productos() {
             <h2 className="text-4xl font-semibold tracking-tight">
               Sección Gourmet
             </h2>
-            <p className="text-[#2A2D34]/70 mt-4 text-lg max-w-2xl mx-auto">
-              Próximamente
+               <p className="text-[#2A2D34]/70 mt-4 text-lg max-w-2xl mx-auto">
+              Una línea especial que eleva la experiencia, pensada para usos gourmet y combinaciones únicas.
             </p>
+            <div className="grid grid-cols-1 mt-6 gap-16 max-w-6xl mx-auto flex-1">
+             {pures.map((p, i) => (
+              <article
+                key={p.nombre}
+                className="flex flex-col items-center text-center group"
+              >
+                <motion.div
+                  key={i}
+                  className="flex flex-col items-center text-center group"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: i * 0.05 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="relative w-80 h-80 rounded-3xl overflow-hidden bg-white border border-[#e9eceb] shadow-sm hover:shadow-lg transition-all duration-500">
+                    <motion.img
+                      src={p.imagen}
+                      alt={p.nombre}
+                      className="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-105"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.8 }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+
+                  <div className="mt-6">
+                  
+                    <h3 className="text-xl font-semibold">{p.nombre}</h3>
+                    <p className="text-[#b01a2f] mt-1 font-medium">
+                      ${p.precio}{" "}
+                      <span className="text-[#2A2D34]/60 text-sm">
+                        | {p.peso}
+                      </span>
+                    </p>
+                    <div
+                      className="mt-3 w-10 h-[3px] rounded-full mx-auto"
+                      style={{ backgroundColor: p.color }}
+                    />
+                  </div>
+                </motion.div>
+
+              
+              </article>
+            ))}
+            </div>
           </div>
         </section>
       </section>
