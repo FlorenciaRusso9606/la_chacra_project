@@ -16,11 +16,16 @@ export async function PUT(
   const price = Number(formData.get("price"));
   const stock = Number(formData.get("stock"));
   const image = formData.get("image") as File | null;
+  const removeImage = formData.get("removeImage"); 
 
   const forwardFormData = new FormData();
   forwardFormData.append("name", name);
   forwardFormData.append("price", String(price));
   forwardFormData.append("stock", String(stock));
+
+  if (removeImage) {
+    forwardFormData.append("removeImage", "true");
+  }
 
   if (image) {
     forwardFormData.append("image", image);
@@ -37,7 +42,6 @@ export async function PUT(
   const data = await resp.json();
   return NextResponse.json(data, { status: resp.status });
 }
-
 
 
 // Eliminar producto
