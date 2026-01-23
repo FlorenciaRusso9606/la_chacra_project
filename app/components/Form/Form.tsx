@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "./Input";
-import { Button } from "../Button";
+import { Button } from "../ui/Button";
 import { TextArea } from "./Textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formData, formSchema } from "@/app/schemas/formSchema";

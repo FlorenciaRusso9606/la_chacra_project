@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
-import { ClientProviders } from "./components/ClientProviders";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { WhatsappIcon } from "./components/Whatsapp";
+import { Providers } from "./providers/providers";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -83,9 +83,11 @@ export const metadata: Metadata = {
     images: ["https://www.dulceslachacra.com/images/Seo.png"],
   },
 
+};
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#b01a2f",
-
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -94,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${poppins.variable} relative antialiased bg-[#FAFAF8] flex flex-col justify-between min-h-screen`}
       >
+          <Providers>
         {/* Fondo */}
         <div className="absolute inset-0 bg-[url('/images/texturas/paper-texture.jpg')] bg-repeat opacity-15 pointer-events-none z-0" />
 
@@ -130,7 +133,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         <Footer />
-        <ClientProviders />
+        
+        </Providers>
       </body>
     </html>
   );
