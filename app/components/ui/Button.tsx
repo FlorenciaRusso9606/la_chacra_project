@@ -1,5 +1,5 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
-    label: string;
+    label: any;
     onClick?: () => void;
     className?: string
     type?: 'submit';

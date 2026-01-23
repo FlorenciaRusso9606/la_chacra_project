@@ -7,10 +7,10 @@ type Props = {
 
 export function OrderRow({ order }: Props) {
   return (
-    <tr className="border-t">
-      <td>{order.id}</td>
-      <td>{order.customerName}</td>
-      <td>${order.total}</td>
+    <tr className="border-b last:border-b-0 hover:bg-gray-50 transition">
+      <td className="px-4 py-3 font-medium text-gray-900">{order.id}</td>
+      <td className="px-4 py-3 text-gray-900">{order.customerName}</td>
+      <td className="px-4 py-3 text-gray-700">${order.total}</td>
       <td>
         <OrderStatusBadge status={order.status} />
       </td>

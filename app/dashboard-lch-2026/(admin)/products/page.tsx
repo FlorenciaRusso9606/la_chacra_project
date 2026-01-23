@@ -5,6 +5,7 @@ import api from "@/app/lib/axios";
 import { ProductsTable } from "./components/ProductsTable";
 import { EditProductForm } from "./components/EditProductForm";
 import { Button } from "@/app/components/ui/Button";
+import { Modal } from "@/app/components/ui/Modal";
 import { Product } from "@/app/types/product";
 import { EditProductFormState } from "@/app/types/editProduct";
 
@@ -20,10 +21,6 @@ export default function ProductsPage() {
     if (!confirm("¿Eliminar producto?")) return;
     await api.delete(`/products/${id}`);
     setProducts((prev) => prev.filter((p) => p.id !== id));
-  };
-
-  const handleEdit = (product: Product) => {
-    setEditingProduct(product);
   };
 
   const handleSave = async (form: EditProductFormState) => {
@@ -45,7 +42,9 @@ export default function ProductsPage() {
     const updatedProduct = res.data;
 
     setProducts((prev) =>
-      prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+      prev.map((p) =>
+        p.id === updatedProduct.id ? updatedProduct : p
+      )
     );
 
     setEditingProduct(null);
@@ -53,24 +52,30 @@ export default function ProductsPage() {
 
   return (
     <section>
-      <div className="flex justify-between items-center mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">Productos</h1>
         <Button label="Nuevo producto" />
       </div>
 
       <ProductsTable
         products={products}
-        onEdit={handleEdit}
+        onEdit={setEditingProduct}
         onDelete={handleDelete}
       />
 
-      {editingProduct && (
-        <EditProductForm
-          product={editingProduct}
-          onSave={handleSave}
-          onCancel={() => setEditingProduct(null)}
-        />
-      )}
+      
+      <Modal
+        open={Boolean(editingProduct)}
+        onClose={() => setEditingProduct(null)}
+      >
+        {editingProduct && (
+          <EditProductForm
+            product={editingProduct}
+            onSave={handleSave}
+            onCancel={() => setEditingProduct(null)}
+          />
+        )}
+      </Modal>
     </section>
   );
 }

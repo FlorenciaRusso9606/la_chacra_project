@@ -7,13 +7,14 @@ type Props = {
 
 export function OrdersTable({ orders }: Props) {
   return (
-    <table className="w-full border">
-      <thead>
-        <tr className="bg-green-100">
-          <th>ID</th>
-          <th>Cliente</th>
-          <th>Total</th>
-          <th>Estado</th>
+     <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+    <table className="w-full text-sm">
+      <thead className="bg-gray-50 border-b">
+        <tr className="text-left text-gray-600">
+          <th  className="px-4 py-3 font-medium">ID</th>
+          <th  className="px-4 py-3 font-medium">Cliente</th>
+          <th  className="px-4 py-3 font-medium">Total</th>
+          <th  className="px-4 py-3 font-medium">Estado</th>
         </tr>
       </thead>
       <tbody>
@@ -22,5 +23,11 @@ export function OrdersTable({ orders }: Props) {
         ))}
       </tbody>
     </table>
+     {orders.length === 0 && (
+        <div className="p-6 text-center text-sm text-gray-500">
+          No hay órdenes cargadas
+        </div>
+      )}
+    </div>
   );
 }
