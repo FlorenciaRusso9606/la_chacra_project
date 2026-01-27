@@ -125,14 +125,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        <Navbar />
 
         <main className="flex-1 relative">
           {children}
           <WhatsappIcon />
         </main>
 
-        <Footer />
         
         </Providers>
       </body>

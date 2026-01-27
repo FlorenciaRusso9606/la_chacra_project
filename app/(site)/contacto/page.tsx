@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin } from "lucide-react";
-import Form from "../components/Form/Form";
+import Form from "../../components/Form/Form";
 
 export default function Contacto() {
   return (
@@ -12,8 +12,6 @@ export default function Contacto() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-5xl px-6"
       >
-
-
         <div className="flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="flex flex-col items-center gap-3 text-center mb-8">
             <div className="text-[#b01a2f] font-semibold flex items-center gap-2 hover:text-[#9bcb88] transition-colors">

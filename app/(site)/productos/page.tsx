@@ -1,10 +1,10 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Product } from "../types/product";
-import api from "../lib/axios"
+import { Product } from "../../types/product";
+import api from "../../lib/axios"
 import { useCart } from "@/app/providers/CartProvider";
-import { ProductGrid } from "../components/products/ProductGrid";
+import { ProductGrid } from "../../components/products/ProductGrid";
 
 export default function Productos() {
   const reduceMotion = useReducedMotion();

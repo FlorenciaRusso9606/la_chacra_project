@@ -39,16 +39,17 @@ export default function HomePage() {
       },
     ],
   };
+
   return (
     <>
-        <Script
-  id="faq-schema"
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify(faqSchema),
-  }}
-/>
-<main className="relative">
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
+
       {/* Banner */}
       <div className="relative w-screen h-screen overflow-hidden">
         <picture>
@@ -61,18 +62,12 @@ export default function HomePage() {
           />
         </picture>
 
-        {/* Capa de oscurecimiento */}
         <div className="absolute inset-0 bg-black/15" />
       </div>
 
-     
       <h1 className="text-center text-2xl md:text-4xl font-semibold text-[#2A2D34] mt-8">
         Dulces artesanales con sabor a tradición patagónica
       </h1>
-  
-
-    </main>
     </>
-    
   );
 }

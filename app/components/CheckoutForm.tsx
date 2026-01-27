@@ -9,7 +9,6 @@ import { useCart } from "@/app/providers/CartProvider";
 import toast from "react-hot-toast";
 import api from "@/app/lib/axios";
 import { ShoppingBag } from "lucide-react";
-import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function CheckoutForm() {
@@ -55,7 +54,10 @@ const router = useRouter();
       console.error(err);
     }
   };
-
+const totalUnits = items.reduce(
+  (acc, item) => acc + item.quantity,
+  0
+);
   return (
     <div className="min-h-screen bg-[#f7fbf5] flex justify-center px-4 py-10">
       <div className="w-full max-w-xl">
@@ -77,10 +79,25 @@ const router = useRouter();
 
           {/* Resumen */}
           <div className="bg-[#f6faf4] rounded-lg p-4 text-sm">
-            <div className="flex justify-between mb-2">
-              <span>Productos</span>
-              <span>{items.length}</span>
-            </div>
+             <p className="font-medium text-[#2C3E2F]">Resumen de compra</p>
+
+               <ul className="space-y-2">
+    {items.map(item => (
+      <li
+        key={item.id}
+        className="flex justify-between gap-2"
+      >
+        <span className="text-gray-700">
+          {item.name} × {item.quantity}
+        </span>
+
+        <span className="font-medium">
+          ${item.price * item.quantity}
+        </span>
+      </li>
+    ))}
+  </ul>
+            
             <div className="flex justify-between font-semibold text-base">
               <span>Total</span>
               <span>${totalPrice}</span>
@@ -105,13 +122,13 @@ const router = useRouter();
             <Button
               type="submit"
               disabled={isSubmitting || items.length === 0}
-              className="w-full bg-[#639251] hover:bg-[#4f7a3f]"
+              className="w-full bg-[#639251] hover:bg-[#4f7a3f] py-2 text-white"
             >
               {isSubmitting ? "Redirigiendo a Mercado Pago..." : "Confirmar compra"}
             </Button>
           </form>
           <p className="text-xs text-center text-gray-500">
-  Serás redirigida a Mercado Pago para finalizar el pago de forma segura
+  Serás redirigido a Mercado Pago para finalizar el pago de forma segura
 </p>
 
         </div>

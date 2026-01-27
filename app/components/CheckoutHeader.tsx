@@ -7,8 +7,8 @@ export function CheckoutHeader() {
   const router = useRouter();
 
   return (
-    <header className="w-full bg-white border-b border-[#e3efdd]">
-      <div className="max-w-xl mx-auto px-4 py-3 flex items-center gap-3">
+    <header className="w-full bg-white border-b border-[#e3efdd]  ">
+      <div className="max-w-full mx-auto px-6 py-3 flex items-center gap-3 justify-between">
         <button
           onClick={() => router.back()}
           className="
@@ -22,7 +22,7 @@ export function CheckoutHeader() {
           Volver
         </button>
 
-        <div className="flex-1 text-center">
+        <div className="text-center">
            <a href="/">
       <img
         src="/images/logotipo.png"

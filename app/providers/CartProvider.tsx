@@ -74,25 +74,39 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
 const increase = (id: number) => {
   setItems(prev =>
-    prev.map(p => {
-      if (p.id !== id) return p;
-      if (p.quantity >= p.stock) return p;
+    prev.map(item => {
+      if (item.id !== id) return item;
 
-      return { ...p, quantity: p.quantity + 1 };
+      if (item.quantity >= item.stock) {
+        return item; 
+      }
+
+      return {
+        ...item,
+        quantity: item.quantity + 1,
+      };
     })
   );
 };
 
 
-  const decrease = (id: number) => {
-    setItems(prev =>
-      prev
-        .map(p =>
-          p.id === id ? { ...p, quantity: p.quantity - 1 } : p
-        )
-        .filter(p => p.quantity > 0)
-    );
-  };
+const decrease = (id: number) => {
+  setItems(prev =>
+    prev
+      .map(item => {
+        if (item.id !== id) return item;
+
+        const newQuantity = item.quantity - 1;
+
+        return {
+          ...item,
+          quantity: newQuantity,
+        };
+      })
+      .filter(item => item.quantity > 0)
+  );
+};
+
 
   const removeItem = (id: number) => {
     setItems(prev => prev.filter(p => p.id !== id));
@@ -106,11 +120,15 @@ const increase = (id: number) => {
   const closeCart = () => setOpen(false);
 
 
-  const totalItems = items.reduce((acc, i) => acc + i.quantity, 0);
-  const totalPrice = items.reduce(
-    (acc, i) => acc + i.price * i.quantity,
-    0
-  );
+const totalItems = items.reduce(
+  (acc, item) => acc + Math.max(item.quantity, 0),
+  0
+);
+ const totalPrice = items.reduce(
+  (acc, item) => acc + Math.max(item.quantity, 0) * item.price,
+  0
+);
+
 
   return (
     <CartContext.Provider

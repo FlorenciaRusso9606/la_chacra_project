@@ -88,15 +88,22 @@ export function CartDrawer() {
                 </p>
                 <div className="flex items-bottom w-[60%]">
                    <div className="flex justify-center items-center rounded-3xl gap-2 mt-2 border w-[70%] text-[#2C3E2F] border-[#2C3E2F]">
-                  <Button className="text-[#2C3E2F]"onClick={() => decrease(item.id)}>-</Button>
+<Button
+  className="text-[#2C3E2F]"
+  onClick={() => decrease(item.id)}
+  disabled={item.quantity <= 1}
+>
+  -
+</Button>
                   <span>{item.quantity}</span>
 
-               <Button
+             <Button
   onClick={() => increase(item.id)}
-  disabled={item.stock === 0}
+  disabled={item.quantity >= item.stock}
 >
-  {item.stock === 0 ? "Sin stock" : "+"}
+  +
 </Button>
+
                 </div>
                    <Button
                  
