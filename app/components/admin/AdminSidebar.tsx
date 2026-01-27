@@ -44,10 +44,10 @@ export function AdminSidebar() {
 
       <div className="mt-10">
         <Button
-          label="Cerrar sesión"
+         
           onClick={logout}
           className="w-full text-sm bg-red-500 hover:bg-red-600 text-white"
-        />
+        >Cerrar sesión</Button>
       </div>
     </aside>
   );
