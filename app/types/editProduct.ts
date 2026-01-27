@@ -1,8 +1,10 @@
-export interface EditProductFormState  {
+export type EditProductFormState = {
   id: number;
-  name: string;
-  price: number;
-  stock: number;
+  name?: string;
+  price?: number;
+  stock?: number;
+  color?: string;
+  weight?: string;
   imageFile?: File;
   removeImage?: boolean;
 };

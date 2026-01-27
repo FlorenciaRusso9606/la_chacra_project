@@ -107,12 +107,12 @@ export default function Form() {
       <Button
         type="submit"
         disabled={isSubmitting}
-        label={isSubmitting ? "Enviando..." : "Enviar"}
+        
         className="bg-[#9bcb88] hover:bg-[#8cb87b] text-[#2A2D34] 
                    font-semibold py-3 rounded-xl shadow-md hover:shadow-lg 
                    transition-all duration-300 transform hover:-translate-y-0.5 
                    focus:ring-2 focus:ring-[#AEE4EA] focus:outline-none"
-      />
+      >{isSubmitting ? "Enviando..." : "Enviar"}</Button>
     </form>
   );
 }

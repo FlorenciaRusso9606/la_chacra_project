@@ -13,13 +13,16 @@ type Props = {
 };
 
 export function EditProductForm({ product, onSave, onCancel }: Props) {
-  const [form, setForm] = useState<EditProductFormState>({
-    id: product.id,
-    name: product.name,
-    price: product.price,
-    stock: product.stock,
-    removeImage: false,
-  });
+const [form, setForm] = useState<EditProductFormState>({
+  id: product.id,
+  name: product.name,
+  price: product.price,
+  stock: product.stock,
+  color: product.color ?? "",
+  weight: product.weight ?? "",
+  removeImage: false,
+});
+
 
   const BACKEND_URL =
     process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
@@ -32,11 +35,12 @@ export function EditProductForm({ product, onSave, onCancel }: Props) {
   <div className="flex items-center justify-between border-b px-6 w-full">
   <h2 className="text-lg font-semibold">Editar producto</h2>
   <Button
-  label={ <X />}
+  
     onClick={onCancel}
     className="text-gray-400 hover:text-gray-600"
-  />
-  
+  >
+  <X />
+  </Button>
 </div>
 
 
@@ -68,6 +72,25 @@ export function EditProductForm({ product, onSave, onCancel }: Props) {
             }
           />
         </div>
+<div className="grid grid-cols-2 gap-3">
+  <Input
+    label="Color"
+    value={form.color}
+    onChange={(e) =>
+      setForm({ ...form, color: e.target.value })
+    }
+    placeholder="Ej: #b01a2f, #e1ac48, #9bcb88"
+  />
+
+  <Input
+    label="Peso"
+    value={form.weight}
+    onChange={(e) =>
+      setForm({ ...form, weight: e.target.value })
+    }
+    placeholder="Ej: 250g, 150g"
+  />
+</div>
 
         {product.imageUrl && !hasNewImage && (
           <div className="space-y-2">
@@ -119,15 +142,15 @@ export function EditProductForm({ product, onSave, onCancel }: Props) {
 
       <div className="mt-6 flex justify-end gap-2">
         <Button
-          label="Cancelar"
+    
           onClick={onCancel}
           className="border border-gray-300 text-gray-700 hover:bg-gray-50"
-        />
+        >Cancelar</Button>
         <Button
-          label="Guardar cambios"
+      
           onClick={() => onSave(form)}
           className="bg-green-600 text-white hover:bg-green-700"
-        />
+        >Guardar cambios</Button>
       </div>
     </div>
   );

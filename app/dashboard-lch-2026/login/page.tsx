@@ -83,27 +83,27 @@ console.log("LOGIN RENDER")
     {...register("password")}
   />
 
-  <button
+  <Button
     type="button"
     onClick={() => setShowPassword(!showPassword)}
     className="absolute right-3 top-9 text-gray-500"
   >
     {showPassword ? <Eye size={18} /> : <EyeClosed size={18} />}
-  </button>
+  </Button>
 </div>
 
                
 
                 <Button
-                label={isSubmitting ? "Ingresando..." : "Ingresar"}
+           
                   type="submit"
                   color="primary"
                   disabled={isSubmitting}
                   className="font-bold"
                   aria-busy={isSubmitting}
-                >
-                  
-                </Button>
+                >{isSubmitting ? "Ingresando..." : "Ingresar"}
+                  </Button>
+              
               </form>
             </div>
           </motion.div>

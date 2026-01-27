@@ -8,10 +8,26 @@ import { Button } from "@/app/components/ui/Button";
 import { Modal } from "@/app/components/ui/Modal";
 import { Product } from "@/app/types/product";
 import { EditProductFormState } from "@/app/types/editProduct";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../../providers/AuthProvider";
+import { Loader } from "@/app/components/ui/Loader";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const { user, loading } = useAuth();
+
+  const router = useRouter();
+   useEffect(() => {
+    if (!user) {
+      router.replace("/dashboard-lch-2026/login");
+    }
+  }, [ user, router]);
+  if (loading) {
+    return <Loader text="Cargando productos" loading />;
+  }
+
+
 
   useEffect(() => {
     api.get("/products").then((res) => setProducts(res.data));
@@ -26,9 +42,12 @@ export default function ProductsPage() {
   const handleSave = async (form: EditProductFormState) => {
     const formData = new FormData();
 
-    formData.append("name", form.name);
+    formData.append("name", String(form.name));
     formData.append("price", String(form.price));
-    formData.append("stock", String(form.stock));
+    formData.append("stock", String(form.stock));    
+    formData.append("stock", String(form.weight));
+    formData.append("stock", String(form.color));
+
 
     if (form.removeImage) {
       formData.append("removeImage", "true");

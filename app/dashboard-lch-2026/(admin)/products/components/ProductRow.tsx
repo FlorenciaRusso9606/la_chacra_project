@@ -34,7 +34,9 @@ export function ProductRow({ product, onEdit, onDelete }: Props) {
       <td className="px-4 py-3 text-gray-700">
         ${product.price.toLocaleString()}
       </td>
-
+ <td className="px-4 py-3 font-medium text-gray-900">
+        {product.weight ? product.weight : <span>Sin peso asignado</span>}
+      </td>
       <td className="px-4 py-3">
         <span
           className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
@@ -48,19 +50,21 @@ export function ProductRow({ product, onEdit, onDelete }: Props) {
             : "Sin stock"}
         </span>
       </td>
-
+<td className="px-4 py-3 font-medium text-gray-900">
+        {product.color ? product.color : <span>Sin color asignado</span>}
+      </td>
       <td className="px-4 py-3">
         <div className="flex justify-end gap-2">
           <Button
-            label="Editar"
+           
             onClick={() => onEdit(product)}
             className="border bg-orange-500 text-white hover:bg-orange-600"
-          />
+          >Editar</Button>
           <Button
-            label="Eliminar"
+      
             onClick={() => onDelete(product.id)}
             className="bg-red-500 text-white hover:bg-red-600"
-          />
+          >Eliminar</Button>
         </div>
       </td>
     </tr>

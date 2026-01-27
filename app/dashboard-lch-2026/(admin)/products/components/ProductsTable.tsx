@@ -19,7 +19,9 @@ export function ProductsTable({ products, onEdit, onDelete }: Props) {
             <th className="px-4 py-3 font-medium">Producto</th>
             <th className="px-4 py-3 font-medium">Imagen</th>
             <th className="px-4 py-3 font-medium">Precio</th>
-            <th className="px-4 py-3 font-medium">Stock</th>
+             <th className="px-4 py-3 font-medium">Peso</th>
+            <th className="px-4 py-3 font-medium">Stock</th>            
+              <th className="px-4 py-3 font-medium">Color</th>
             <th className="px-4 py-3 font-medium text-right">Acciones</th>
           </tr>
         </thead>

@@ -8,4 +8,6 @@ export interface Product{
     active: boolean;
     createdAt: Date;
     updatedAt: Date;
+      category: "DULCE" | "PURE";
+  color: string;
 }
