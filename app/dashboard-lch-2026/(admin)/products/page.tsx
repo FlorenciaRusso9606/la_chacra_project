@@ -73,7 +73,7 @@ export default function ProductsPage() {
     <section>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">Productos</h1>
-        <Button label="Nuevo producto" />
+        <Button>Nuevo producto</Button>
       </div>
 
       <ProductsTable
