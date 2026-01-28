@@ -81,11 +81,14 @@ const totalItems = items.reduce(
       )}
     </Button>
   </div>
-  <div
-      className={`fixed top-0 left-0 w-full  bg-[#F9F9F8] text-[#2C3E2F] font-medium flex flex-col items-center space-y-6 justify-center gap-8 text-lg transition-all duration-300 ease-in-out z-50 ${
-          open ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
-      >
+ <div
+  className={`fixed top-0 left-0 w-full h-screen
+  bg-[#F9F9F8] text-[#2C3E2F] font-medium
+  flex flex-col items-center justify-center gap-8 text-lg
+  transition-all duration-300 ease-in-out z-50 ${
+    open ? "opacity-100 visible" : "opacity-0 invisible"
+  }`}
+>
         <Link href="/" onClick={() => setOpen(false)}>
           <span className="relative pb-1 after:bg-[#b01a2f] hover:text-[#b01a2f] after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer transition-colors font-semibold">Inicio</span>
         </Link>
