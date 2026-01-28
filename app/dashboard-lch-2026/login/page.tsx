@@ -43,7 +43,6 @@ export default function LoginPage() {
 
   return (
     <div>
-      <Navbar/>
  <main className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#f6faf4] to-[#eef6ea] px-4">
       <motion.div
         initial={{ opacity: 0, y: 25 }}

@@ -31,7 +31,7 @@ export default function AdminLayout({
 
   return (
     <div className="">
-      <Navbar/>
+
       <div className="flex">
         <AdminSidebar />
       <main className="flex-1 p-6">{children}</main>
