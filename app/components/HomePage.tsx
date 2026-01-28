@@ -64,7 +64,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-black/15" />
       </div>
 
-      <h1 className="text-center text-2xl leading-tight md:text-4xl font-semibold text-[#2A2D34] mt-8">
+      <h1 className="text-center text-2xl h-16 leading-tight md:text-4xl font-semibold text-[#2A2D34] mt-8">
         Dulces artesanales con sabor a tradición patagónica
       </h1>
     </>
