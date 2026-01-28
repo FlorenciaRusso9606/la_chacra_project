@@ -29,20 +29,21 @@ export default function AdminLayout({
 
 
 
-return (
-  <div className="flex min-h-screen">
+  return (
+    <div className="flex min-h-screen">
 
-    <AdminSidebar />
+      <AdminSidebar />
 
-    <main className="flex-1 p-6 flex items-center justify-center">
-      {loading ? (
-        <Loader text="Cargando" loading />
-      ) : (
-        children
-      )}
-    </main>
+      <main className="flex-1 p-6">
+        {loading ? (
+          <div className="flex h-full items-center justify-center">
+            <Loader text="Cargando" loading />
+          </div>
+        ) : (
+          children
+        )}
+      </main>
 
-  </div>
-);
-
+    </div>
+  );
 }
