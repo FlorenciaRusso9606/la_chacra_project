@@ -20,7 +20,6 @@ const totalItems = items.reduce(
   relative
   flex
   items-center
-
  bg-[#F9F9F8]/90 backdrop-blur-sm text-[#2A2D34] px-6 shadow-sm border-b border-[#AEE4EA]/40 min-h-20 z-50
 
 ">
@@ -83,7 +82,7 @@ const totalItems = items.reduce(
     </Button>
   </div>
   <div
-      className={`fixed top-0 left-0 w-full h-screen bg-[#F9F9F8] text-[#2C3E2F] font-medium flex flex-col items-center space-y-6 justify-center gap-8 text-lg transition-all duration-300 ease-in-out z-50 ${
+      className={`fixed top-0 left-0 w-full  bg-[#F9F9F8] text-[#2C3E2F] font-medium flex flex-col items-center space-y-6 justify-center gap-8 text-lg transition-all duration-300 ease-in-out z-50 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >

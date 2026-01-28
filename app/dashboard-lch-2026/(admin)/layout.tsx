@@ -30,7 +30,7 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="">
       <Navbar/>
       <div className="flex">
         <AdminSidebar />

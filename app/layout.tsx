@@ -93,14 +93,15 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body
-        className={`${poppins.variable} relative antialiased bg-[#FAFAF8] flex flex-col justify-between min-h-screen`}
-      >
-          <Providers>
-        {/* Fondo */}
-        <div className="absolute inset-0 bg-[url('/images/texturas/paper-texture.jpg')] bg-repeat opacity-15 pointer-events-none z-0" />
+     <body className={`${poppins.variable} antialiased bg-[#FAFAF8]`}>
+  <Providers>
 
-        {/* Datos estructurados JSON-LD */}
+    {/* Fondo fijo */}
+    <div className="fixed inset-0 bg-[url('/images/texturas/paper-texture.jpg')] bg-repeat opacity-15 pointer-events-none -z-10" />
+
+    {/* CONTENEDOR DUEÑO DEL SCROLL */}
+    <div className="h-screen overflow-y-auto flex flex-col relative">
+ {/* Datos estructurados JSON-LD */}
         <Script
           id="json-ld-localbusiness"
           type="application/ld+json"
@@ -126,14 +127,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
 
 
-        <main className="flex-1 relative">
-          {children}
-          <WhatsappIcon />
-        </main>
+      <Navbar />
+
+      <main className="flex-1">
+        {children}
+      </main>
+
+      <Footer />
+
+      <WhatsappIcon />
+
+    </div>
+
+  </Providers>
+</body>
 
         
-        </Providers>
-      </body>
     </html>
   );
 }

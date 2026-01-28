@@ -51,8 +51,7 @@ export default function HomePage() {
       />
 
       {/* Banner */}
-      <div className="relative w-screen h-screen overflow-hidden">
-        <picture>
+<div className="relative w-full h-[calc(100svh-80px)] overflow-hidden">        <picture>
           <source media="(min-width:1024px)" srcSet="/images/banner/banner-home-desktop.png" />
           <source media="(min-width:640px)" srcSet="/images/banner/banner-home-tablet.png" />
           <img
@@ -65,7 +64,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-black/15" />
       </div>
 
-      <h1 className="text-center text-2xl md:text-4xl font-semibold text-[#2A2D34] mt-8">
+      <h1 className="text-center text-2xl leading-tight md:text-4xl font-semibold text-[#2A2D34] mt-8">
         Dulces artesanales con sabor a tradición patagónica
       </h1>
     </>

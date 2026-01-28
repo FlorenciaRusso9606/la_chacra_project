@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
-
-
-html, body, #__next {
+html,
+body {
   height: 100%;
-   overflow-x: hidden;
+  overflow: hidden; 
 }
 
+#__next {
+  height: 100%;
+}

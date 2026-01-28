@@ -12,6 +12,7 @@ export const WhatsappIcon = () => {
           className="w-14 h-14 drop-shadow-lg hover:scale-110 transition-transform duration-300"
         />
       </a>
+
     </div>
   );
 };
