@@ -21,22 +21,28 @@ export default function AdminLayout({
     }
   }, [loading, user, router]);
 
-  if (loading) {
-    return <Loader text="Cargando" loading />;
-  }
+
 
   if (!user) {
     return null;
   }
 
-  return (
 
 
-      <div className="flex">
-        <AdminSidebar />
-      <main className="flex-1 p-6">{children}</main>
-   
-      
-    </div>
-  );
+return (
+  <div className="flex min-h-screen">
+
+    <AdminSidebar />
+
+    <main className="flex-1 p-6 flex items-center justify-center">
+      {loading ? (
+        <Loader text="Cargando" loading />
+      ) : (
+        children
+      )}
+    </main>
+
+  </div>
+);
+
 }
