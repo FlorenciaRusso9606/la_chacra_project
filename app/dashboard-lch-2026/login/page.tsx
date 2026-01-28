@@ -13,7 +13,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/Form/Input";
-
+import { Navbar } from "@/app/components/Navbar";
 export default function LoginPage() {
   const router = useRouter();
   const { setAdmin } = useAuth();
@@ -42,7 +42,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#f6faf4] to-[#eef6ea] px-4">
+    <div>
+      <Navbar/>
+ <main className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#f6faf4] to-[#eef6ea] px-4">
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -107,5 +109,7 @@ export default function LoginPage() {
         </div>
       </motion.div>
     </main>
+    </div>
+   
   );
 }
