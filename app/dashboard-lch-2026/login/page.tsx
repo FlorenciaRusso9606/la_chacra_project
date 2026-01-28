@@ -88,13 +88,12 @@ export default function LoginPage() {
                 {...register("password")}
               />
 
-              <button
-                type="button"
+              <Button
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-9 text-gray-500 hover:text-gray-700 transition"
+                className="absolute right-3 top-10 text-gray-500 hover:text-gray-700 transition "
               >
                 {showPassword ? <Eye size={18} /> : <EyeClosed size={18} />}
-              </button>
+              </Button>
             </div>
 
             <Button
