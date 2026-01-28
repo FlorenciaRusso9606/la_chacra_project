@@ -30,12 +30,12 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="">
+
 
       <div className="flex">
         <AdminSidebar />
       <main className="flex-1 p-6">{children}</main>
-      </div>
+   
       
     </div>
   );
