@@ -30,12 +30,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
  
-  useEffect(() => {
+ useEffect(() => {
+  try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      setItems(JSON.parse(stored));
-    }
-  }, []);
+    if (stored) setItems(JSON.parse(stored));
+  } catch {
+    localStorage.removeItem(STORAGE_KEY);
+  }
+}, []);
+
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
