@@ -8,10 +8,13 @@ export const checkoutSchema = z.object({
   email: z
     .email("Email inválido"),
 
-  phone: z
-    .string()
-    .min(8, "Teléfono inválido")
-    .optional(),
+ phone: z
+  .string()
+  .transform(v => v.trim())
+  .refine(v => v === "" || v.length >= 8, {
+    message: "Teléfono inválido",
+  }),
+
 
   province: z
     .string()

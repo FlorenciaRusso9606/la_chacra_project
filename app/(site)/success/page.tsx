@@ -2,9 +2,14 @@
 
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
-
+import { useCart } from "@/app/providers/CartProvider";
+import { useEffect } from "react";
 export default function SuccessPage() {
-  return (
+       const {  clearCart } = useCart();
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
+    return (
     <main className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-md w-full text-center bg-white rounded-2xl shadow-lg p-8 border">
         <CheckCircle size={56} className="mx-auto text-green-600 mb-4" />
@@ -37,5 +42,6 @@ export default function SuccessPage() {
         </Link>
       </div>
     </main>
+    
   );
 }

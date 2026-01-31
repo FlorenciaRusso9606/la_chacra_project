@@ -10,10 +10,11 @@ import toast from "react-hot-toast";
 import api from "@/app/lib/axios";
 import { ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import { useState } from "react";
 export default function CheckoutForm() {
   const { items, clearCart, totalPrice } = useCart();
 const router = useRouter();
+const [redirecting, setRedirecting] = useState(false);
 
   const {
     register,
@@ -50,8 +51,8 @@ const router = useRouter();
 
       const { init_point } = paymentRes.data;
 
-      clearCart();
-      window.location.href = init_point;
+setRedirecting(true);
+window.location.href = init_point;
 
     } catch (err: any) {
       toast.error(
@@ -116,6 +117,20 @@ const totalUnits = items.reduce(
   className="grid grid-cols-1 gap-4 sm:grid-cols-2"
 >
   <Input
+  label="Nombre y apellido"
+  className="sm:col-span-2"
+  {...register("customerName")}
+  error={errors.customerName?.message}
+/>
+
+<Input
+  label="Email"
+  type="email"
+  className="sm:col-span-2"
+  {...register("email")}
+  error={errors.email?.message}
+/>
+  <Input
     label="Teléfono (opcional)"
     {...register("phone")}
     error={errors.phone?.message}
@@ -156,7 +171,9 @@ const totalUnits = items.reduce(
   <p className="sm:col-span-2 text-xs text-center text-gray-500">
     Envíos disponibles únicamente dentro de Argentina
   </p>
-
+<p className="sm:col-span-2 text-xs text-center text-gray-400">
+  Pago seguro procesado por Mercado Pago
+</p>
   <Button
     type="submit"
     disabled={isSubmitting || items.length === 0}
