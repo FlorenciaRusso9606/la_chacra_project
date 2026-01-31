@@ -25,14 +25,21 @@ const router = useRouter();
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
-      const orderRes = await api.post("/orders", {
-        customerName: data.customerName,
-        email: data.email,
-        items: items.map(i => ({
-          productId: i.id,
-          quantity: i.quantity,
-        })),
-      });
+     const orderRes = await api.post("/orders", {
+  customerName: data.customerName,
+  email: data.email,
+  phone: data.phone,
+  province: data.province,
+  city: data.city,
+  postalCode: data.postalCode,
+  addressLine1: data.addressLine1,
+  addressLine2: data.addressLine2,
+  items: items.map(i => ({
+    productId: i.id,
+    quantity: i.quantity,
+  })),
+});
+
 
       const order = orderRes.data;
 
@@ -104,29 +111,64 @@ const totalUnits = items.reduce(
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <Input
-              label="Nombre y apellido"
-              placeholder="Juan Pérez"
-              {...register("customerName")}
-              error={errors.customerName?.message}
-            />
+       <form
+  onSubmit={handleSubmit(onSubmit)}
+  className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+>
+  <Input
+    label="Teléfono (opcional)"
+    {...register("phone")}
+    error={errors.phone?.message}
+  />
 
-            <Input
-              label="Email"
-              placeholder="juan@email.com"
-              {...register("email")}
-              error={errors.email?.message}
-            />
+  <Input
+    label="Código Postal"
+    {...register("postalCode")}
+    error={errors.postalCode?.message}
+  />
 
-            <Button
-              type="submit"
-              disabled={isSubmitting || items.length === 0}
-              className="w-full bg-[#639251] hover:bg-[#4f7a3f] py-2 text-white"
-            >
-              {isSubmitting ? "Redirigiendo a Mercado Pago..." : "Confirmar compra"}
-            </Button>
-          </form>
+  <Input
+    label="Provincia"
+    {...register("province")}
+    error={errors.province?.message}
+  />
+
+  <Input
+    label="Ciudad"
+    {...register("city")}
+    error={errors.city?.message}
+  />
+
+  <Input
+    label="Dirección"
+    className="sm:col-span-2"
+    {...register("addressLine1")}
+    error={errors.addressLine1?.message}
+  />
+
+  <Input
+    label="Departamento / Casa (opcional)"
+    className="sm:col-span-2"
+    {...register("addressLine2")}
+    error={errors.addressLine2?.message}
+  />
+
+  <p className="sm:col-span-2 text-xs text-center text-gray-500">
+    Envíos disponibles únicamente dentro de Argentina
+  </p>
+
+  <Button
+    type="submit"
+    disabled={isSubmitting || items.length === 0}
+    className="sm:col-span-2 w-full bg-[#639251] hover:bg-[#4f7a3f] py-2 text-white"
+  >
+    {isSubmitting
+      ? "Redirigiendo a Mercado Pago..."
+      : "Confirmar compra"}
+  </Button>
+</form>
+    
+      
           <p className="text-xs text-center text-gray-500">
   Serás redirigido a Mercado Pago para finalizar el pago de forma segura
 </p>

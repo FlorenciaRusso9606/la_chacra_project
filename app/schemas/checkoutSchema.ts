@@ -4,9 +4,34 @@ export const checkoutSchema = z.object({
   customerName: z
     .string()
     .min(3, "El nombre es obligatorio"),
+
   email: z
-    .string()
     .email("Email inválido"),
+
+  phone: z
+    .string()
+    .min(8, "Teléfono inválido")
+    .optional(),
+
+  province: z
+    .string()
+    .min(1, "Provincia requerida"),
+
+  city: z
+    .string()
+    .min(1, "Ciudad requerida"),
+
+  postalCode: z
+    .string()
+    .min(4, "Código postal inválido"),
+
+  addressLine1: z
+    .string()
+    .min(5, "Dirección requerida"),
+
+  addressLine2: z
+    .string()
+    .optional(),
 });
 
 export type CheckoutFormData = z.infer<typeof checkoutSchema>;
