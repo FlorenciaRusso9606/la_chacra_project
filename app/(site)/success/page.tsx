@@ -3,13 +3,20 @@
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/app/providers/CartProvider";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+
 export default function SuccessPage() {
-       const {  clearCart } = useCart();
+  const { clearCart } = useCart();
+  const cleared = useRef(false);
+
   useEffect(() => {
-    clearCart();
+    if (!cleared.current) {
+      clearCart();
+      cleared.current = true;
+    }
   }, [clearCart]);
-    return (
+
+  return (
     <main className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-md w-full text-center bg-white rounded-2xl shadow-lg p-8 border">
         <CheckCircle size={56} className="mx-auto text-green-600 mb-4" />
@@ -26,22 +33,11 @@ export default function SuccessPage() {
 
         <Link
           href="/"
-          className="
-            inline-block
-            bg-[#639251]
-            text-white
-            font-medium
-            px-6
-            py-3
-            rounded-xl
-            hover:bg-[#4f7a3f]
-            transition
-          "
+          className="inline-block bg-[#639251] text-white px-6 py-3 rounded-xl hover:bg-[#4f7a3f] transition"
         >
           Volver al inicio
         </Link>
       </div>
     </main>
-    
   );
 }
