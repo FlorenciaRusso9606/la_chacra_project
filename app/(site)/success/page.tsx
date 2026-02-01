@@ -2,19 +2,12 @@
 
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { useCart } from "@/app/providers/CartProvider";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function SuccessPage() {
-  const { clearCart } = useCart();
   const cleared = useRef(false);
 
-  useEffect(() => {
-    if (!cleared.current) {
-      clearCart();
-      cleared.current = true;
-    }
-  }, [clearCart]);
+ 
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6">

@@ -52,6 +52,7 @@ const [redirecting, setRedirecting] = useState(false);
       const { init_point } = paymentRes.data;
 
 setRedirecting(true);
+clearCart()
 window.location.href = init_point;
 
     } catch (err: any) {
