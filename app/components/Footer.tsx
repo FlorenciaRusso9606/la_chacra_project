@@ -45,7 +45,7 @@ export const Footer = () => {
         <div className="flex flex-col text-white">
           <h3 className="font-semibold mb-3 text-lg">Redes</h3>
           <a
-            href="https://www.instagram.com/lachacra.dulces/"
+            href="https://www.instagram.com/lachacra_dulces/"
             target="_blank"
             className="text-white/90 hover:text-[#9bcb88] transition-colors mb-2"
           >
