@@ -63,7 +63,7 @@ export function ProductGrid({ title, description, products }: Props) {
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-6xl mx-auto px-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-20 max-w-7xl mx-auto px-6">
         {sortedProducts.map((p, i) => (
           <article
             key={p.id}
@@ -75,8 +75,8 @@ export function ProductGrid({ title, description, products }: Props) {
               transition={{ duration: 0.6, delay: i * 0.05 }}
               viewport={{ once: true }}
             >
-              {/*  imágenes 320×320 */}
-              <div className="relative w-80 h-80 rounded-3xl overflow-hidden bg-white border border-[#e9eceb] shadow-sm hover:shadow-lg transition-all duration-500">
+              {/* Contenedor fijo — 400x400 */}
+              <div className="relative w-[400px] h-[400px] rounded-3xl overflow-hidden bg-white border border-[#e9eceb] shadow-sm hover:shadow-lg transition-all duration-500">
                 {p.imageUrl ? (
                   <motion.img
                     src={`${BACKEND_URL}${p.imageUrl}`}
