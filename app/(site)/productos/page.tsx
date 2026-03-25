@@ -19,6 +19,7 @@ api.get("/store/products").then((res) => setProducts(res.data))
 }, []);
 const dulces = products.filter(p => p.category === "DULCE");
 const pures = products.filter(p => p.category === "PURE");
+const confituras = products.filter(p => p.category === "CONFITURA");
 
   return (
     <main>
@@ -65,18 +66,23 @@ const pures = products.filter(p => p.category === "PURE");
         <section className="py-24 px-6">
         
           {/* Grid */}
-        <ProductGrid
-  title="Nuestros Productos"
-  description="Dulces cocidos a fuego lento, con el balance justo entre dulzura y naturalidad."
+       <ProductGrid
+  title="Nuestros Dulces"
+  description="Cocidos a fuego lento, con el equilibrio justo entre dulzura y sabor natural."
   products={dulces}
 />
 
 <ProductGrid
-  title="Sección Gourmet"
-  description="Una línea especial que eleva la experiencia, pensada para usos gourmet y combinaciones únicas."
+  title="Línea Gourmet"
+  description="Sabores más suaves y versátiles, pensados para acompañar y realzar otras preparaciones."
   products={pures}
 />
 
+<ProductGrid
+  title="Confituras"
+  description="Más intensas y con carácter, donde la fruta y la acidez encuentran su mejor equilibrio."
+  products={confituras}
+/>
           
         </section>
       </section>
