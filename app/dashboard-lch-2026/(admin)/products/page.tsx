@@ -45,8 +45,8 @@ export default function ProductsPage() {
     formData.append("name", String(form.name));
     formData.append("price", String(form.price));
     formData.append("stock", String(form.stock));    
-    formData.append("stock", String(form.weight));
-    formData.append("stock", String(form.color));
+    formData.append("weight", String(form.weight)); 
+formData.append("color", String(form.color));
 
 
     if (form.removeImage) {
