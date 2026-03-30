@@ -6,6 +6,7 @@ import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/Form/Input";
 import { EditProductFormState } from "@/app/types/editProduct";
 import { X } from 'lucide-react';
+import { getImageUrl } from "@/app/lib/getImageUrl"
 type Props = {
   product: Product;
   onSave: (product: EditProductFormState) => void;
@@ -25,8 +26,6 @@ const [form, setForm] = useState<EditProductFormState>({
 });
 
 const handleSubmit = () => onSave(form);
-  const BACKEND_URL =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
   const hasNewImage = Boolean(form.imageFile);
 
@@ -100,11 +99,15 @@ const handleSubmit = () => onSave(form);
             </span>
 
             <div className="flex items-center gap-4">
-              <img
-                src={`${BACKEND_URL}${product.imageUrl}`}
-                alt={product.name}
-                className="h-16 w-16 rounded-lg object-cover border"
-              />
+           {product.imageUrl ? (
+<img
+  src={getImageUrl(product.imageUrl)}
+  alt={product.name}
+  className="h-16 w-16 rounded-lg object-cover border"
+/>
+) : (
+  <span className="text-xs text-gray-500">Sin imagen</span>
+)}
 
               <label className="flex items-center gap-2 text-sm text-gray-600">
                 <input

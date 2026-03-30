@@ -4,6 +4,7 @@ import { useCart } from "@/app/providers/CartProvider";
 import { Button } from "@/app/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { Trash2, X } from 'lucide-react';
+import { getImageUrl } from "@/app/lib/getImageUrl"
 
 export function CartDrawer() {
   const {
@@ -19,8 +20,6 @@ export function CartDrawer() {
 
   const router = useRouter();
 
-  const BACKEND_URL =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
   return (
     <div
@@ -60,72 +59,78 @@ export function CartDrawer() {
             </p>
           )}
 
-          {items.map(item => (
-            <li
-              key={item.id}
-              className="flex gap-2 pb-3"
+          {items.map(item => {
+  const imageSrc = getImageUrl(item.imageUrl);
+
+  return (
+    <li
+      key={item.id}
+      className="flex gap-2 pb-3"
+    >
+      {imageSrc ? (
+        <img
+          src={imageSrc}
+          alt={`Imagen de ${item.name}`}
+          className="h-16 w-16 rounded-lg object-cover border"
+        />
+      ) : (
+        <span className="text-xs text-gray-500">Sin imagen</span>
+      )}
+
+      <div className="flex-1">
+        <p className="font-medium">{item.name}</p>
+
+        <p className="text-xs text-gray-500">
+          Stock disponible: {Math.max(0, item.stock - item.quantity)}
+        </p>
+
+        <p className="text-sm text-gray-500">
+          ${item.price.toLocaleString("es-AR")} c/u
+        </p>
+
+        <div className="flex items-bottom w-[60%]">
+          <div className="flex justify-center items-center rounded-3xl gap-2 mt-2 border w-[70%] text-[#2C3E2F] border-[#2C3E2F]">
+            <Button
+              className="text-[#2C3E2F]"
+              onClick={() => decrease(item.id)}
+              disabled={item.quantity <= 1}
             >
-              {item.imageUrl && (
-                <img
-                  src={
-                    item.imageUrl
-                      ? `${BACKEND_URL}${item.imageUrl}`
-                      : "/images/products/proximamente.png"
-                  }
-                  alt={item.name}
-                  className="h-16 w-16 object-cover rounded"
-                />
-              )}
+              -
+            </Button>
 
-              <div className="flex-1 ">
-                <p className="font-medium">{item.name}</p>
-                <p className="text-xs text-gray-500">
-  Stock disponible: {item.stock - item.quantity}
-</p>
+            <span>{item.quantity}</span>
 
-                <p className="text-sm text-gray-500">
-                  ${item.price} c/u
-                </p>
-                <div className="flex items-bottom w-[60%]">
-                   <div className="flex justify-center items-center rounded-3xl gap-2 mt-2 border w-[70%] text-[#2C3E2F] border-[#2C3E2F]">
-<Button
-  className="text-[#2C3E2F]"
-  onClick={() => decrease(item.id)}
-  disabled={item.quantity <= 1}
->
-  -
-</Button>
-                  <span>{item.quantity}</span>
+            <Button
+              onClick={() => increase(item.id)}
+              disabled={item.quantity >= item.stock}
+            >
+              +
+            </Button>
+          </div>
 
-             <Button
-  onClick={() => increase(item.id)}
-  disabled={item.quantity >= item.stock}
->
-  +
-</Button>
+          <Button
+            className="text-[#b01a2f]"
+            onClick={() => removeItem(item.id)}
+          >
+            <Trash2 size={18} />
+          </Button>
+        </div>
 
-                </div>
-                   <Button
-                 
-                    className=" text-[#b01a2f]"
-                    onClick={() => removeItem(item.id)}
-                  >
-                        <Trash2 size={18} />
-                  </Button>
-              </div>
-              {item.quantity >= item.stock && (
-  <p className="text-xs text-[#b01a2f] mt-1">
-    Llegaste al máximo disponible
-  </p>
-)}
-                </div>
-               
+        {item.quantity >= item.stock && (
+          <p className="text-xs text-[#b01a2f] mt-1">
+            Llegaste al máximo disponible
+          </p>
+        )}
+      </div>
 
-              <div className="font-semibold mr-2">
-                ${item.price * item.quantity}
-              </div>
-            </li>
-          ))}
+      <div className="font-semibold mr-2">
+        ${(item.price * item.quantity).toLocaleString("es-AR")}
+      </div>
+    </li>
+  );
+})}
+          
+           
         </ul>
 
         <footer className="flex flex-col p-4 border-t border-[#9bcb88] mr-2">

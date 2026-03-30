@@ -5,13 +5,11 @@ import { Product } from "../../types/product";
 import api from "../../lib/axios"
 import { useCart } from "@/app/providers/CartProvider";
 import { ProductGrid } from "../../components/products/ProductGrid";
-
+import { getImageUrl } from "@/app/lib/getImageUrl"
 export default function Productos() {
   const reduceMotion = useReducedMotion();
 const [products, setProducts] = useState<Product[]>([]);
 const { addToCart } = useCart();
-  const BACKEND_URL =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
 useEffect(() =>  {
 api.get("/store/products").then((res) => setProducts(res.data))

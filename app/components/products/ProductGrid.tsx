@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Product } from "@/app/types/product";
 import { useCart } from "@/app/providers/CartProvider";
 import { Button } from "@/app/components/ui/Button";
-
+import { getImageUrl } from "@/app/lib/getImageUrl"
 type Props = {
   title: string;
   description?: string;
@@ -17,6 +17,8 @@ function parseWeight(weight?: string | number): number {
   const match = weight.toString().match(/[\d.]+/);
   return match ? parseFloat(match[0]) : 0;
 }
+
+
 
 function NoImagePlaceholder() {
   return (
@@ -41,8 +43,6 @@ function NoImagePlaceholder() {
 export function ProductGrid({ title, description, products }: Props) {
   const { addToCart } = useCart();
 
-  const BACKEND_URL =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
   if (products.length === 0) return null;
 
@@ -64,77 +64,82 @@ export function ProductGrid({ title, description, products }: Props) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 max-w-6xl mx-auto px-6">
-        {sortedProducts.map((p, i) => (
-          <article
-            key={p.id}
-            className="flex flex-col items-center text-center group"
+      {sortedProducts.map((p, i) => {
+  const imageSrc = getImageUrl(p.imageUrl);
+
+  return (
+    <article
+      key={p.id}
+      className="flex flex-col items-center text-center group"
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: i * 0.05 }}
+        viewport={{ once: true }}
+      >
+        <div className="relative w-80 h-80 rounded-3xl overflow-hidden bg-white border border-[#e9eceb] shadow-sm hover:shadow-lg transition-all duration-500">
+          
+          {imageSrc ? (
+            <motion.img
+              src={imageSrc}
+              alt={`Imagen de ${p.name}`}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <NoImagePlaceholder />
+          )}
+
+          {p.stock === 0 && (
+            <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-md font-semibold text-gray-700">
+              Sin stock
+            </div>
+          )}
+        </div>
+
+        <div className="mt-4">
+          <h3 className="text-xl font-semibold">{p.name}</h3>
+
+          <p className="text-[#b01a2f] font-medium">
+            ${p.price.toLocaleString("es-AR")}
+            {p.weight && (
+              <span className="text-[#2A2D34]/60 text-sm">
+                {" "} | {p.weight}
+              </span>
+            )}
+          </p>
+
+          {p.color && (
+            <div
+              className="mt-3 w-10 h-[3px] rounded-full mx-auto"
+              style={{ backgroundColor: p.color }}
+            />
+          )}
+
+          <Button
+            onClick={() => addToCart(p)}
+            disabled={p.stock === 0}
+            className="
+              mt-4
+              w-full
+              bg-[#639251]
+              text-white
+              font-medium
+              rounded-md
+              py-2
+              transition
+              hover:bg-[#4f7a3f]
+              disabled:opacity-50
+              disabled:cursor-not-allowed
+            "
           >
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: i * 0.05 }}
-              viewport={{ once: true }}
-            >
-              {/*  imágenes 320×320 */}
-              <div className="relative w-80 h-80 rounded-3xl overflow-hidden bg-white border border-[#e9eceb] shadow-sm hover:shadow-lg transition-all duration-500">
-                {p.imageUrl ? (
-                  <motion.img
-                    src={`${BACKEND_URL}${p.imageUrl}`}
-                    alt={p.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <NoImagePlaceholder />
-                )}
-
-                {p.stock === 0 && (
-                  <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-md font-semibold text-gray-700">
-                    Sin stock
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-4">
-                <h3 className="text-xl font-semibold">{p.name}</h3>
-
-                <p className="text-[#b01a2f] font-medium">
-                  ${p.price}
-                  {p.weight && (
-                    <span className="text-[#2A2D34]/60 text-sm">
-                      {" "}
-                      | {p.weight}
-                    </span>
-                  )}
-                </p>
-
-                <div
-                  className="mt-3 w-10 h-[3px] rounded-full mx-auto"
-                  style={{ backgroundColor: p.color }}
-                />
-
-                <Button
-                  onClick={() => addToCart(p)}
-                  disabled={p.stock === 0}
-                  className="
-                    mt-4
-                    w-full
-                    bg-[#639251]
-                    text-white
-                    font-medium
-                    rounded-md
-                    py-2
-                    transition
-                    hover:bg-[#4f7a3f]
-                    disabled:opacity-50
-                    disabled:cursor-not-allowed
-                  "
-                >
-                  Agregar al carrito
-                </Button>
-              </div>
-            </motion.div>
-          </article>
-        ))}
+            Agregar al carrito
+          </Button>
+        </div>
+      </motion.div>
+    </article>
+  );
+})}
       </div>
     </section>
   );
