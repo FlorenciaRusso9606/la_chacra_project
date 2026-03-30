@@ -22,7 +22,7 @@ useEffect(() => {
   if (!user) return;
 
   setLoadingProducts(true);
-  api.get("/admin/products")
+  api.get("/products")
     .then((res) => setProducts(res.data))
     .finally(() => setLoadingProducts(false));
 }, [user]);
@@ -31,7 +31,7 @@ useEffect(() => {
   const handleDelete = async (id: number) => {
     if (!confirm("¿Eliminar producto?")) return;
    try {
-  await api.delete(`/admin/products/${id}`);
+  await api.delete(`/products/${id}`);
   setProducts((prev) => prev.filter((p) => p.id !== id));
 } catch (error) {
   console.error("Error deleting product", error);
@@ -58,7 +58,7 @@ useEffect(() => {
   setSaving(true);
 
   try {
-    const res = await api.put(`/admin/products/${form.id}`, formData);
+    const res = await api.put(`/products/${form.id}`, formData);
     const updatedProduct = res.data;
 
     setProducts((prev) =>
