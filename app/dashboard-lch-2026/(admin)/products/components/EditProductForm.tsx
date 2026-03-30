@@ -10,9 +10,10 @@ type Props = {
   product: Product;
   onSave: (product: EditProductFormState) => void;
   onCancel: () => void;
+saving: boolean;
 };
 
-export function EditProductForm({ product, onSave, onCancel }: Props) {
+export function EditProductForm({ product, onSave, saving, onCancel }: Props) {
 const [form, setForm] = useState<EditProductFormState>({
   id: product.id,
   name: product.name,
@@ -23,7 +24,7 @@ const [form, setForm] = useState<EditProductFormState>({
   removeImage: false,
 });
 
-
+const handleSubmit = () => onSave(form);
   const BACKEND_URL =
     process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
@@ -34,13 +35,13 @@ const [form, setForm] = useState<EditProductFormState>({
 <div className="flex flex-col items-center justify-between pb-6 pt-2">
   <div className="flex items-center justify-between border-b px-6 w-full">
   <h2 className="text-lg font-semibold">Editar producto</h2>
-  <Button
-  
-    onClick={onCancel}
-    className="text-gray-400 hover:text-gray-600"
-  >
+ <Button
+  onClick={() => !saving && onCancel()}
+  disabled={saving}
+  className="text-gray-400 hover:text-gray-600"
+>
   <X />
-  </Button>
+</Button>
 </div>
 
 
@@ -142,15 +143,15 @@ const [form, setForm] = useState<EditProductFormState>({
 
       <div className="mt-6 flex justify-end gap-2">
         <Button
-    
+    disabled={saving}
           onClick={onCancel}
           className="border border-gray-300 text-gray-700 hover:bg-gray-50"
         >Cancelar</Button>
-        <Button
-      
-          onClick={() => onSave(form)}
-          className="bg-green-600 text-white hover:bg-green-700"
-        >Guardar cambios</Button>
+        
+    
+<Button onClick={handleSubmit}  disabled={saving}  className="bg-green-600 text-white hover:bg-green-700">
+  {saving ? "Guardando..." : "Guardar"}
+</Button>
       </div>
     </div>
   );

@@ -16,48 +16,49 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const { user, loading } = useAuth();
+const [loadingProducts, setLoadingProducts] = useState(true);
+const [saving, setSaving] = useState(false);
+useEffect(() => {
+  if (!user) return;
 
+  setLoadingProducts(true);
+  api.get("/admin/products")
+    .then((res) => setProducts(res.data))
+    .finally(() => setLoadingProducts(false));
+}, [user]);
   const router = useRouter();
-   useEffect(() => {
-    if (!user) {
-      router.replace("/dashboard-lch-2026/login");
-    }
-  }, [ user, router]);
-  if (loading) {
-    return <Loader text="Cargando productos" loading />;
-  }
-
-
-
-  useEffect(() => {
-    api.get("/products").then((res) => setProducts(res.data));
-  }, []);
 
   const handleDelete = async (id: number) => {
     if (!confirm("¿Eliminar producto?")) return;
-    await api.delete(`/products/${id}`);
-    setProducts((prev) => prev.filter((p) => p.id !== id));
+   try {
+  await api.delete(`/admin/products/${id}`);
+  setProducts((prev) => prev.filter((p) => p.id !== id));
+} catch (error) {
+  console.error("Error deleting product", error);
+}
   };
 
   const handleSave = async (form: EditProductFormState) => {
-    const formData = new FormData();
+  const formData = new FormData();
 
-    formData.append("name", String(form.name));
-    formData.append("price", String(form.price));
-    formData.append("stock", String(form.stock));    
-    formData.append("weight", String(form.weight)); 
-formData.append("color", String(form.color));
+  formData.append("name", String(form.name));
+  formData.append("price", String(form.price));
+  formData.append("stock", String(form.stock));
+  formData.append("weight", String(form.weight));
+  formData.append("color", String(form.color));
 
+  if (form.removeImage) {
+    formData.append("removeImage", "true");
+  }
 
-    if (form.removeImage) {
-      formData.append("removeImage", "true");
-    }
+  if (form.imageFile) {
+    formData.append("image", form.imageFile);
+  }
 
-    if (form.imageFile) {
-      formData.append("image", form.imageFile);
-    }
+  setSaving(true);
 
-    const res = await api.put(`/products/${form.id}`, formData);
+  try {
+    const res = await api.put(`/admin/products/${form.id}`, formData);
     const updatedProduct = res.data;
 
     setProducts((prev) =>
@@ -67,8 +68,21 @@ formData.append("color", String(form.color));
     );
 
     setEditingProduct(null);
-  };
+  } catch (error) {
+    console.error("Error updating product", error);
+  } finally {
+    setSaving(false);
+  }
+};
+useEffect(() => {
+  if (!loading && !user) {
+    router.replace("/dashboard-lch-2026/login");
+  }
+}, [user, loading, router]);
 
+if (loading || loadingProducts) {
+  return <Loader text="Cargando productos" loading />;
+}
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -88,11 +102,12 @@ formData.append("color", String(form.color));
         onClose={() => setEditingProduct(null)}
       >
         {editingProduct && (
-          <EditProductForm
-            product={editingProduct}
-            onSave={handleSave}
-            onCancel={() => setEditingProduct(null)}
-          />
+         <EditProductForm
+  product={editingProduct}
+  onSave={handleSave}
+  onCancel={() => setEditingProduct(null)}
+  saving={saving}
+/>
         )}
       </Modal>
     </section>
