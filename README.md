@@ -1,16 +1,11 @@
 # La Chacra – Dulces Artesanales 
 
-> Este repositorio corresponde al frontend del e-commerce La Chacra.
-> El backend se encuentra en un repositorio separado.
+> Este repositorio corresponde al backend del e-commerce La Chacra.
+> El frontend se encuentra en un repositorio separado.
 
 E-commerce orientado a mostrar productos regionales y ofrecer una experiencia visual artesanal, cuidada y accesible. Cuenta con carrito persistente, pagos integrados con Mercado Pago, panel de administración y stock sincronizado con Google Sheets.
 
 🔗 Demo en producción: https://dulceslachacra.com
-
-🔐 Panel admin: https://dulceslachacra.com/dashboard-lch-2026
-(Las credenciales no son públicas)
-
-
 
 
 ## Tecnologías utilizadas
@@ -38,6 +33,7 @@ E-commerce orientado a mostrar productos regionales y ofrecer una experiencia vi
 
 ### Infraestructura
 - **Railway (backend + DB)**
+- **AWS S3 (almacenamiento de imágenes)**
 - **Dominio real en producción**
 ---
 ## ✨ Funcionalidades
@@ -65,6 +61,7 @@ E-commerce orientado a mostrar productos regionales y ofrecer una experiencia vi
 
 - Mercado Pago: pagos online
 - Resend: emails transaccionales
+- AWS S3: almacenamiento y entrega de imágenes de productos
 - Google Sheets: stock sincronizado con clientas
 
 ---
