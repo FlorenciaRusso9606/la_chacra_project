@@ -1,150 +1,175 @@
-# La Chacra – Dulces Artesanales 
+# La Chacra – Dulces Artesanales 🍬
 
-> Este repositorio corresponde al frontend del e-commerce La Chacra.
-> El backend se encuentra en un repositorio separado.
+> **ES** | E-commerce de productos regionales artesanales con experiencia de compra cuidada, carrito persistente, pagos integrados y panel de administración.
+>
+> **EN** | E-commerce for regional artisanal products, featuring a polished shopping experience, persistent cart, integrated payments, and an admin dashboard.
 
-E-commerce orientado a mostrar productos regionales y ofrecer una experiencia visual artesanal, cuidada y accesible. Cuenta con carrito persistente, pagos integrados con Mercado Pago, panel de administración y stock sincronizado con Google Sheets.
+🔗 **Live demo:** [dulceslachacra.com](https://dulceslachacra.com)
 
-🔗 Demo en producción: https://dulceslachacra.com
-
-🔐 Panel admin: https://dulceslachacra.com/dashboard-lch-2026
-(Las credenciales no son públicas)
-
-
-
-
-## Tecnologías utilizadas
-
-### Frontend
-- **Next.js 14 / App Router**
-- **React 18**
-- **TypeScript**
-- **Tailwind CSS**
-- **Framer Motion** (animaciones)
-- **Next/Image + picture** para optimización de imágenes
-- **SEO metadata** integrada mediante `app/layout.tsx`
-
-### Backend
-- **Node.js**
-- **Express.js**
-- **REST API**
-- **Mercado Pago SDK**
-- **Resend (emails transaccionales)**
-
-
-### Base de datos
-- **PostgreSQL**
-- **Railway (deploy backend + database)**
-
-### Infraestructura
-- **Railway (backend + DB)**
-- **Dominio real en producción**
 ---
-## ✨ Funcionalidades
 
-- Carrito persistente con localStorage
+## 🛠 Tech Stack
+
+| Layer | Technologies |
+|---|---|
+| **Frontend** | Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Framer Motion |
+| **Backend** | Node.js, Express.js, REST API |
+| **Database** | PostgreSQL |
+| **Payments** | Mercado Pago SDK |
+| **Email** | Resend (transactional) |
+| **Storage** | AWS S3 |
+| **Infra** | Railway, Docker, GitHub Actions |
+| **Testing** | Vitest, Supertest, Prisma (test DB) |
+
+---
+
+## ✨ Features / Funcionalidades
+
+**EN**
+- Persistent cart via `localStorage`
+- Real-time stock control
+- Online payments with Mercado Pago
+- Automatic order confirmation emails
+- Admin panel (login-only, no public registration)
+- Full product CRUD
+- Order visualization
+- Stock synced with the client's Google Sheets
+- Toast notifications for key actions
+
+**ES**
+- Carrito persistente con `localStorage`
 - Control de stock en tiempo real
-- Pagos con Mercado Pago
-- Envío automático de emails de confirmación
-- Panel de administración con login (sin registro)
-- CRUD de productos
+- Pagos online con Mercado Pago
+- Envío automático de emails de confirmación de pedido
+- Panel de administración con login (sin registro público)
+- CRUD completo de productos
 - Visualización de órdenes
 - Stock sincronizado con Google Sheets de la clienta
 - Notificaciones de acciones con toasts
 
 ---
-## 🔐 Panel de administración
 
-- Login manual (no hay registro público)
-- Edición y gestión de productos
-- Visualización de órdenes
-- Control de stock
+## 🔐 Admin Panel / Panel de Administración
 
----
-## 🔗 Integraciones
+**EN** — Access is restricted to a single login. No public registration. Includes product management, order history, and stock control.
 
-- Mercado Pago: pagos online
-- Resend: emails transaccionales
-- Google Sheets: stock sincronizado con clientas
+**ES** — El acceso está restringido a un login único. Sin registro público. Incluye gestión de productos, historial de órdenes y control de stock.
 
 ---
 
-## 🚀 Deploy
+## 🔗 Integrations / Integraciones
 
-- Backend y base de datos desplegados en Railway
-- Frontend en producción con dominio propio
-
----
-
-## 🎨 Diseño
--Diseño responsive optimizado para mobile, tablet y desktop
-- Componentes reutilizables: Navbar, Footer, WhatsApp Floating Button 
-- Diseño UI/UX propio
-- Animaciones suaves y accesibles para productos (Framer Motion)
-- Edición de fotografías de producto
-- Enfoque en experiencia de compra simple y clara
-- Buenas prácticas de accesibilidad (alt text, estructura semántica, contraste revisado).  
-- Metadata básica para SEO.
+| Service | Purpose / Uso |
+|---|---|
+| **Mercado Pago** | Online payments / Pagos online |
+| **Resend** | Transactional emails / Emails transaccionales |
+| **AWS S3** | Image storage & delivery / Almacenamiento y entrega de imágenes |
+| **Google Sheets** | Real-time stock sync / Stock sincronizado en tiempo real |
 
 ---
 
-## Instalación
+## 🧪 Testing
 
-Clonar el repositorio:
+**EN** — Integration tests run against a real isolated database, with global mocks for all external services.
+
+**ES** — Tests de integración sobre base de datos real aislada, con mocks globales para todos los servicios externos.
+
+- **Framework:** Vitest + Supertest
+- **DB:** Prisma (test environment)
+- Mocks for / Mocks para: AWS S3, Resend, Mercado Pago
+- Idempotent webhook tests / Tests de webhooks idempotentes
+- DB reset between test suites / Reseteo de base de datos entre suites
 
 ```bash
+npm run test:run
+```
+
+---
+
+## ⚙️ CI/CD
+
+**EN** — GitHub Actions runs the full test suite on every push to `main`/`develop` and on all pull requests targeting `main`. A PostgreSQL container is spun up automatically for each run.
+
+**ES** — GitHub Actions ejecuta la suite completa de tests en cada push a `main`/`develop` y en todos los pull requests a `main`. Se levanta un contenedor de PostgreSQL automáticamente en cada ejecución.
+
+---
+
+## 🐳 Docker
+
+```bash
+# Build the image / Construir la imagen
+docker build -t la-chacra-backend .
+```
+
+---
+
+## 🚀 Getting Started / Instalación
+
+```bash
+# Clone the repo / Clonar el repositorio
 git clone https://github.com/tu-usuario/la-chacra.git
 cd la-chacra
-```
-## Instalar dependencias:
-```bash
+
+# Install dependencies / Instalar dependencias
 npm install
-```
-## Scripts disponibles
 
-Iniciar el servidor de desarrollo:
-```bash
+# Start development server / Iniciar servidor de desarrollo
 npm run dev
-```
 
-## Construir para producción:
-```bash
+# Build for production / Construir para producción
 npm run build
 
-```
-
-## Correr el servidor en producción:
-```bash
+# Run in production / Correr en producción
 npm start
-```
 
-## Formatear con Prettier:
-```bash
+# Format with Prettier / Formatear con Prettier
 npm run format
 ```
-## SEO
 
-El proyecto incluye:
+---
 
-- metadata en layout.tsx
-- Etiqueta: <!DOCTYPE html><html lang="es">
-- Alt text descriptivo en todas las imágenes
-- Jerarquía correcta de títulos (h1, h2, h3)
-- Contenido optimizado para buscadores
+## 🎨 Design & UX / Diseño
 
-## 📷 Capturas
+**EN**
+- Fully responsive: mobile, tablet, and desktop
+- Custom UI/UX design
+- Smooth, accessible animations (Framer Motion)
+- Reusable components: Navbar, Footer, WhatsApp floating button
+- Product photo editing for consistent visual identity
+- Focused on a simple, clear purchase flow
+- Accessibility best practices: descriptive alt text, semantic HTML, verified contrast ratios
+- Basic SEO metadata via `app/layout.tsx`
 
-### Home
-![Home](./screenshots/home.png)
+**ES**
+- Responsive completo: mobile, tablet y desktop
+- Diseño UI/UX propio
+- Animaciones suaves y accesibles (Framer Motion)
+- Componentes reutilizables: Navbar, Footer, botón flotante de WhatsApp
+- Edición de fotos de producto para identidad visual coherente
+- Enfoque en una experiencia de compra simple y clara
+- Buenas prácticas de accesibilidad: alt text descriptivo, HTML semántico, contraste revisado
+- Metadata básica de SEO en `app/layout.tsx`
 
-### Productos
-![Productos](./screenshots/products.png)
+---
 
-### Carrito
-![Carrito](./screenshots/cart.png)
+## 📷 Screenshots
 
-### Panel Admin
-![Admin](./screenshots/admin.png)
+| Home | Products / Productos |
+|---|---|
+| ![Home](public/screenshots/home.png) | ![Products](public/screenshots/products.png) |
 
-### Mercado Pago
-![Mercado Pago](./screenshots/mercado-pago.png)
+| Cart / Carrito | Admin Panel |
+|---|---|
+| ![Cart](public/screenshots/cart.png) | ![Admin](public/screenshots/admin.png) |
+
+| Mercado Pago ||
+|---|---|
+| ![Mercado Pago](public/screenshots/mercado-pago.png) | |
+
+---
+
+## 📦 Deploy
+
+**EN** — Backend and database deployed on **Railway**. Frontend live at [dulceslachacra.com](https://dulceslachacra.com) with a custom domain.
+
+**ES** — Backend y base de datos desplegados en **Railway**. Frontend en producción en [dulceslachacra.com](https://dulceslachacra.com) con dominio propio.
