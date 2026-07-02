@@ -18,6 +18,14 @@ export default function ProductsPage() {
   const { user, loading } = useAuth();
 const [loadingProducts, setLoadingProducts] = useState(true);
 const [saving, setSaving] = useState(false);
+const [toast, setToast] = useState<{ type: "error" | "success"; message: string } | null>(null);
+
+useEffect(() => {
+  if (!toast) return;
+  const t = setTimeout(() => setToast(null), 3000);
+  return () => clearTimeout(t);
+}, [toast]);
+
 useEffect(() => {
   if (!user) return;
 
@@ -30,50 +38,64 @@ useEffect(() => {
 
   const handleDelete = async (id: number) => {
     if (!confirm("¿Eliminar producto?")) return;
-   try {
-  await api.delete(`/products/${id}`);
-  setProducts((prev) => prev.filter((p) => p.id !== id));
-} catch (error) {
-  console.error("Error deleting product", error);
-}
+
+    const previousProducts = products;
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+
+    try {
+      await api.delete(`/products/${id}`);
+      setToast({ type: "success", message: "Producto eliminado" });
+    } catch (error) {
+      console.error("Error deleting product", error);
+      setProducts(previousProducts);
+      setToast({ type: "error", message: "No se pudo eliminar el producto." });
+    }
   };
 
   const handleSave = async (form: EditProductFormState) => {
-  const formData = new FormData();
+    const previousProducts = products;
 
-  formData.append("name", String(form.name));
-  formData.append("price", String(form.price));
-  formData.append("stock", String(form.stock));
-  formData.append("weight", String(form.weight));
-  formData.append("color", String(form.color));
-
-  if (form.removeImage) {
-    formData.append("removeImage", "true");
-  }
-
-  if (form.imageFile) {
-    formData.append("image", form.imageFile);
-  }
-
-  setSaving(true);
-
-  try {
-    const res = await api.put(`/products/${form.id}`, formData);
-    const updatedProduct = res.data;
+    const optimisticProduct: Product = {
+      ...editingProduct!,
+      ...form,
+      imageUrl: form.removeImage
+        ? null
+        : form.imageFile
+        ? URL.createObjectURL(form.imageFile)
+        : editingProduct!.imageUrl,
+    };
 
     setProducts((prev) =>
-      prev.map((p) =>
-        p.id === updatedProduct.id ? updatedProduct : p
-      )
+      prev.map((p) => (p.id === optimisticProduct.id ? optimisticProduct : p))
     );
-
     setEditingProduct(null);
-  } catch (error) {
-    console.error("Error updating product", error);
-  } finally {
-    setSaving(false);
-  }
-};
+    setSaving(true);
+
+    const formData = new FormData();
+    formData.append("name", String(form.name));
+    formData.append("price", String(form.price));
+    formData.append("stock", String(form.stock));
+    formData.append("weight", String(form.weight));
+    formData.append("color", String(form.color));
+    if (form.removeImage) formData.append("removeImage", "true");
+    if (form.imageFile) formData.append("image", form.imageFile);
+
+    try {
+      const res = await api.put(`/products/${form.id}`, formData);
+      const updatedProduct = res.data;
+
+      setProducts((prev) =>
+        prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+      );
+      setToast({ type: "success", message: "Producto actualizado" });
+    } catch (error) {
+      console.error("Error updating product", error);
+      setProducts(previousProducts);
+      setToast({ type: "error", message: "No se pudo guardar el producto. Reintentá." });
+    } finally {
+      setSaving(false);
+    }
+  };
 useEffect(() => {
   if (!loading && !user) {
     router.replace("/dashboard-lch-2026/login");
@@ -110,6 +132,16 @@ if (loading || loadingProducts) {
 />
         )}
       </Modal>
+
+      {toast && (
+        <div
+          className={`fixed bottom-4 right-4 rounded-lg px-4 py-3 text-sm text-white shadow-lg ${
+            toast.type === "error" ? "bg-red-600" : "bg-green-600"
+          }`}
+        >
+          {toast.message}
+        </div>
+      )}
     </section>
   );
 }

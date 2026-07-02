@@ -4,7 +4,7 @@ export interface Product{
     price: number;
     stock: number;
     weight?: string;
-    imageUrl?: string;
+    imageUrl?: string | null;
     active: boolean;
     createdAt: Date;
     updatedAt: Date;
